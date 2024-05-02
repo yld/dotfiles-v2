@@ -1,0 +1,96 @@
+#!/bin/zsh
+
+ZI_HOME="${HOME}/.zi"
+if [[ ! -d "${ZI_HOME}" ]] ; then
+  mkdir -p $ZI_HOME
+  git clone https://github.com/z-shell/zi.git "${ZI_HOME}/bin"
+fi
+source "${ZI_HOME}/bin/zi.zsh"
+
+
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
+### End of Zinit's installer chunk
+
+# asdf
+# zinit ice src="asdf.sh" atinit'zpcompinit; zpcdreplay' nocd
+# zinit light asdf-vm/asdf
+
+# direnv
+# zi ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
+#   atpull'%atclone' src"zhook.zsh"
+# zi light direnv/direnv
+
+# zi ice from"gh-r" as"program" mv"direnv* -> direnv" atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick"direnv" src"zhook.zsh"
+# zi light direnv/direnv
+command -v "direnv" &> /dev/null && eval "$(direnv hook zsh)" @> /dev/null
+
+zi ice from"gh-r" as"program" mv"fetch* -> fetch"
+zi light "gruntwork-io/fetch"
+
+zi ice from"gh-r" as"program" mv"fetch* -> fetch"
+zi light "gruntwork-io/fetch"
+
+zi ice as"completion"
+zi snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+
+zi wait lucid atload"zicompinit; zicdreplay" blockf for \
+  OMZ::plugins/alias-finder/alias-finder.plugin.zsh \
+  OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
+  OMZ::plugins/gpg-agent/gpg-agent.plugin.zsh \
+  OMZP::brew \
+  OMZP::bundler \
+  OMZP::git \
+  OMZP::rails \
+  OMZP::terraform
+
+  # OMZP::asdf \
+  # OMZ::autopep8 \
+  # OMZP::gem \
+  # OMZP::heroku \
+  # OMZP::kubectl \
+  # OMZP::npm \
+  # OMZP::pip \
+  # OMZP::python \
+  # OMZP::postgres \
+  # OMZP::tmux \
+  # OMZP::zsh_reload \
+
+zi wait lucid for \
+  RobertAudi/tsm \
+  b4b4r07/zsh-vimode-visual \
+  gusaiani/elixir-oh-my-zsh \
+  johanhaleby/kubetail \
+  agkozak/zsh-z \
+  tj/burl \
+  voronkovich/gitignore.plugin.zsh
+
+zi light-mode for z-shell/z-a-meta-plugins @annexes @ext-git
+
+export ZSH_ALIAS_FINDER_AUTOMATIC=true
+
+
+zi wait lucid for \
+ atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
+
+zi cdclear -q
+
+autoload -Uz compinit
+autoload -U +X bashcompinit && bashcompinit
+compinit
+
+zi cdreplay -q # <- execute compdefs provided by rest of plugins
+# zinit cdlist # look at gathered compdefs
+
+# # https://gist.github.com/ctechols/ca1035271ad134841284
+# for dump in ~/.zcompdump(N.mh+24); do
+#   compinit
+# done
+
+# The next line updates PATH for the Google Cloud SDK.
+

@@ -1,0 +1,6 @@
+if [ "$OS" = "OSX" ]
+then
+  [ -f /usr/local/share/zsh/site-functions/_the_silver_searcher ] && . /usr/local/share/zsh/site-functions/_the_silver_searcher
+fi
+
+

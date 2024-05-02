@@ -1,0 +1,30 @@
+# zsh only aliases
+[[ $OS = "LINUX" ]] && alias -g ls='ls --color=auto'
+alias -g less='less -F -i -S -w -X -R'
+# alias -g grep='grep --color=auto'
+# alias -g fgrep='fgrep --color=auto'
+# alias -g egrep='egrep --color=auto'
+
+autoload -U zmv
+alias mmv='noglob zmv -W'
+alias zcp='noglob zmv -C'
+alias zln='noglob zmv -L'
+alias zmv='noglob zmv'
+
+alias mkdir='nocorrect mkdir'
+alias 'svn mkdir'='nocorrect svn mkdir'
+alias touch='nocorrect touch'
+alias mv='nocorrect mv'
+
+alias -g L=' | less -R'
+alias -s log='less'
+
+command -v ag &> /dev/null && alias -g A=' |ag '
+alias -g G=' | grep --color=auto'
+alias -g H=' | head '
+alias -g M=' | most '
+alias -g P=" | $PAGER "
+alias -g T=' | tail'
+alias suzsh='su -m -s /bin/zsh -- -u -i'
+
+

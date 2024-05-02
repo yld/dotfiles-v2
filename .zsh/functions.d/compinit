@@ -1,0 +1,6 @@
+#!/bin/bash
+# vim: filetype=sh
+
+fix-compinit() {
+	compaudit | xargs chmod g-w
+}

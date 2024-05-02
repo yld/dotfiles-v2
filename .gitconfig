@@ -1,0 +1,60 @@
+[push]
+  default = current
+[user]
+	name = yld
+	email = 316392+yld@users.noreply.github.com
+	signingkey = 17204EBC5C8E6E51
+[color]
+	ui = true
+[help]
+	autocorrect = 1
+[core]
+	autocrlf = input
+	editor = nvim
+	excludesfile = /Users/yves/.gitignore_global
+	filemode = true
+[merge]
+	tool = vimdiff
+[man]
+	viewer = less
+[alias]
+	br = branch
+	ci = commit
+	co = checkout
+	empty = "git commit --allow-empty"
+	last = log -1 HEAD
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	st = status
+	uncommit = reset HEAD^
+  unstage = reset HEAD
+  wadd = worktree add
+  wls = worktree list
+  wrm = worktree remove  --force
+[diff]
+	tool = vimdiff
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[mergetool]
+	keepBackup = false
+[mergetool "vimdiff"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  ; cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[merge "railsschema"]
+	name = newer Rails schema version
+	driver = "ruby -e '\n\
+		system %(git), %(merge-file), %(--marker-size=%L), %(%A), %(%O), %(%B)\n\
+		b = File.read(%(%A))\n\
+		b.sub!(/^<+ .*\\nActiveRecord::Schema\\.define.version: (\\d+). do\\n=+\\nActiveRecord::Schema\\.define.version: (\\d+). do\\n>+ .*/) do\n\
+		  %(ActiveRecord::Schema.define(version: #{[$1, $2].max}) do)\n\
+		end\n\
+		File.open(%(%A), %(w)) {|f| f.write(b)}\n\
+		exit 1 if b.include?(%(<)*%L)'"
+[submodule]
+	recurse = true
+[pull]
+	rebase = true
+[init]
+	defaultBranch = master

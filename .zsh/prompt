@@ -1,0 +1,96 @@
+# vcs
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git # cvs svn
+zstyle ':vcs_info:*' max-exports 1
+zstyle ':vcs_info:git' get-revision true
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:git*' formats "%{$fg_bold[orange]%}%s %{$reset_color%}%{$fg_bold[white]%}%r%{$reset_color%}%{$fg_bold[yellow]%}[%{$fg_bold[blue]%}%b%{$fg_bold[yellow]%}]%{$reset_color%} %{$fg[magenta]%}%S%{$reset_color%} %m"
+zstyle ':vcs_info:*' branchformat '(%b:%r)' # bzr, svn, svk and hg
+zstyle ':vcs_info:git*' actionformats "(%s|%{$fg[white]%}(%a)%{$fg_bold[black]%}) %12.12i %c%u %b%m"
+zstyle ':vcs_info:git*+set-message:*' hooks git-st git-untracked git-icons
+
+function +vi-git-icons() {
+  local stashes untracked_count staged_count
+
+  if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
+    stashes=$(git stash list 2>/dev/null | wc -l)
+    hook_com[misc]+="%{$fg[yellow]%}●(${stashes})%{$reset_color%} "
+  fi
+  staged_count=${$(git status -s -uno |wc -l)}
+  if [[ $staged_count != "0" ]] ; then
+    hook_com[misc]+="%{$fg_bold[green]%}▲($staged_count)%{$reset_color%}"
+  fi
+  untracked_count=${$(git ls-files --exclude-standard --others --directory --no-empty-directory | wc -l )}
+  if [[ $untracked_count != "0" ]] ; then
+    hook_com[misc]+=" %{$fg[red]%}◼($untracked_count)%{$reset_color%}"
+  fi
+}
+
+function +vi-git-st() {
+    local ahead behind remote
+    local -a gitstatus
+
+    # Are we on a remote-tracking branch?
+    remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
+        --symbolic-full-name --abbrev-ref 2>/dev/null)}
+
+    if [[ -n ${remote} ]] ; then
+        ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+        (( $ahead )) && gitstatus+=( "${green}+${ahead}${gray}" )
+        behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+        (( $behind )) && gitstatus+=( "${red}-${behind}${gray}" )
+        hook_com[branch]="%{$fg_bold[yellow]%}${hook_com[branch]}%{$reset_color%}%{$fg_bold[white]%}:%{$fg_bold[blue]%}${remote}%{$fg_bold[yellow]%}${gitstatus}%{$reset_color%}"
+    fi
+}
+
+autoload -U colors; colors
+#
+### prompt ###
+setopt PROMPT_BANG
+setopt PROMPT_PERCENT
+#setopt PROMPT_SUBST
+precmd() {
+  vcs_info
+	# kube_prompt
+  PS1=$''
+  # if [[ -n ${KUBE_PROMPT} ]] then
+  #   PS1=$PS1"${KUBE_PROMPT}
+# "
+  # fi
+  if [[ -n ${vcs_info_msg_0_} ]] then
+    PS1=$PS1"${vcs_info_msg_0_}
+"
+  fi
+  PS1=$PS1$'%h %(!.%{\e[0;31m%}%n@%m%{\e[0m%}.%{\e[1;61m%}%n@%m%{\e[0m%}) %{\e[0;35m%}%~%{\e[0m%}%0(?..%{ \e[30;41m%}%?%{\e[0m%}) %1(j.%{\e[30;43m%}%j%{\e[0m%}.)%# '
+}
+
+source ~/.sh/keychain.sh
+source ~/.sh/iterm2_shell_integration.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# zmodload zsh/zprof
+
+# # tabtab source for serverless package
+# # uninstall by removing these lines or running `tabtab uninstall serverless`
+# [[ -f /Users/yves/.asdf/installs/nodejs/12.13.0/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/yves/.asdf/installs/nodejs/12.13.0/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# # tabtab source for sls package
+# # uninstall by removing these lines or running `tabtab uninstall sls`
+# [[ -f /Users/yves/.asdf/installs/nodejs/12.13.0/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/yves/.asdf/installs/nodejs/12.13.0/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+# # tabtab source for slss package
+# # uninstall by removing these lines or running `tabtab uninstall slss`
+# [[ -f /Users/yves/.asdf/installs/nodejs/12.13.0/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/yves/.asdf/installs/nodejs/12.13.0/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
+### Added by Zinit's installer
+
+# [ -f ~/.asdf/plugins/java/set-java-home.zsh  ] && . ~/.asdf/plugins/java/set-java-home.zsh
+
+
+
+# ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# if [[ ! -d "$ZINIT_HOME" ]] ; then
+#   mkdir -p "$(dirname $ZINIT_HOME)"
+#   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+# fi
+
+# source "${ZINIT_HOME}/zinit.zsh"
+
