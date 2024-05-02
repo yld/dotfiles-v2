@@ -1,0 +1,3 @@
+alias esu="sudo emerge --sync"
+alias eup="sudo emerge -pDuvN world"
+alias eu="sudo emerge -DuvN world"

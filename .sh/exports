@@ -1,0 +1,143 @@
+# vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=2
+
+umask 002
+limit coredumpsize 0
+
+OS="";
+case "$OSTYPE" in
+  solaris*) OS="SOLARIS" ;;
+  darwin*)  OS="OSX" ;;
+  linux*)
+    OS="LINUX"
+    if [[ -r /etc/gentoo-release ]] ; then
+      LINUX_FLAVOR="DEBIAN"
+    elif [[ -r /etc/debian-release ]]; then
+      LINUX_FLAVOR="GENTOO"
+    fi
+  ;;
+  bsd*)     OS="BSD" ;;
+  msys*)    OS="WINDOWS" ;;
+  *)        OS="UNKNOWN" ;;
+esac
+export OS
+
+[[ $OS = "LINUX" ]] && eval `dircolors`
+
+export GREP_OPTIONS='--color=auto'
+
+if command -v nvim &> /dev/null; then
+  EDITOR=nvim
+elif command -v vim &> /dev/null; then
+  EDITOR=vim
+else
+  EDITOR=vi
+fi
+
+# editor
+export EDITOR
+export ECTO_EDITOR=$EDITOR
+export CVSEDITOR=$EDITOR
+export VISUAL=$EDITOR
+
+if [[ -x /usr/bin/lesspipe.sh ]] ; then
+  export LESSOPEN="|lesspipe.sh %s"
+elif [[ -x /usr/bin/lesspipe ]] ; then
+  export LESSOPEN="|lesspipe %s"
+fi
+
+# if [[ -x '/usr/bin/most' ]] then
+#   export PAGER='/usr/bin/most -c'
+#   export MOST_SWITCHES=" -s"
+#   export MOST_EDITO="$EDITOR +%d %s"
+# el
+if [[ -x $(command -v less) ]] then
+  export PAGER="$(command -v less) -F -i -S -w -X -R"
+elif [[ -x $(command -v more) ]] then
+  export PAGER='/usr/bin/more'
+fi
+
+export MANPAGER="$PAGER"
+
+
+export RSYNC_RSH=ssh
+
+[[ -z $HOSTNAME ]] && export HOSTNAME=`hostname`
+if [[ $OS = "OSX" ]] ; then
+  # use brew ctags
+  # export PATH="$PATH:/usr/local/bin"
+  # gettext
+  # export PATH="/usr/local/opt/gettext/bin:$PATH"
+  # export LDFLAGS="-L/usr/local/opt/gettext/lib"
+  # export CPPFLAGS="-I/usr/local/opt/gettext/include"
+
+  # unbound related
+  PATH="/usr/local/sbin:$PATH"
+  # GNU tar
+  PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+  # GNU coreutils without prefix
+  if [ -d /usr/local/opt/coreutils/libexec/gnubin ] ; then
+    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  fi
+
+  # GPG
+  if [ -d /usr/local/opt/gpg-agent/bin ] ; then
+    PATH="/usr/local/opt/gpg-agent/bin:$PATH"
+  fi
+
+  # postgresql 11
+  if [ -d /usr/local/opt/postgresql@14/bin ] ; then
+    PATH="/usr/local/opt/postgresql@14/bin:$PATH"
+  fi
+
+  # libodbc throught brew
+  echo 'export PATH="/opt/homebrew/opt/libiodbc/bin:$PATH"' >> ~/.zshrc
+
+  export LDFLAGS="-L/opt/homebrew/opt/libiodbc/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/libiodbc/include"
+
+  # ruby (asdf/rubybuild/readline)
+  export RUBY_CONFIGURE_OPTS=-–with-readline-dir=”$(brew --prefix readline)”
+
+fi
+
+[ -f ~/.asdf/plugins/golang/set-env.zsh ] && . ~/.asdf/plugins/golang/set-env.zsh
+[ -f ~/.asdf/plugins/java/set-java-home.zsh ] && . ~/.asdf/plugins/java/set-java-home.zsh
+
+# yarn path
+export PATH="$HOME/.yarn/bin:$PATH"
+test -d "${KREW_ROOT:-$HOME/.krew}" && export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# export PATH="$GEM_HOME/bin:$PATH"
+
+# enable quick scripts
+test -d ~/bin && export PATH="$HOME/bin:${PATH}"
+
+# overcommit
+command -v overcommit && export GIT_TEMPLATE_DIR="$(overcommit --template-dir)"
+
+# terraform
+if [ command -v terraform &> /dev/null ]; then
+  export TERRAFORM_CACHE_DIR="$HOME/.terraform.d/plugins-cache"
+  [[ ! -d "$TERRAFORM_CACHE_DIR" ]] && mkdir -p "$TERRAFORM_CACHE_DIR"
+fi
+
+# terragrunt
+if [ command -v terragrunt &> /dev/null ]; then
+  export TERRAGRUNT_DOWNLOAD=~/.terragrunt-cache
+  [[ ! -d "$TERRAGRUNT_DOWNLOAD" ]] && mkdir -p "$TERRAGRUNT_DOWNLOAD"
+fi
+
+[ command -v rg &> /dev/null ] && export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+export PATH
+export MANPATH
+
+export LC_ALL=en_US.UTF-8 && export LANG=en_US.UTF-8
+
+# erlang
+export KERL_BUILD_DOCS=yes
+export KERL_CONFIGURE_OPTIONS="--without-wx"
+
+# tmux
+[ -d ~/.tmuxifier ] && export PATH="$HOME/.tmuxifier/bin:$PATH"
+

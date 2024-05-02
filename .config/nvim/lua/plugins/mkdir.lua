@@ -1,5 +1,6 @@
 return {
   {
-    'jghauser/mkdir.nvim'
-  }
+    "jghauser/mkdir.nvim",
+    enabled = false,
+  },
 }

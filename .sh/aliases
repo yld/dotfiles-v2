@@ -1,0 +1,89 @@
+# universal aliases (bash and zsh)
+# https://github.com/creationix/nvm/issues/841
+alias sul='su -l'
+alias rm='rm -f'
+
+# first, get rid of GREP_OPTIONS
+unset GREP_OPTIONS
+# grep with color by default
+if [[ $- == *i* ]] ; then
+fi
+
+alias la="ls -A"
+alias lla="ls -lA"
+alias llah="ls -lAh"
+alias ll="ls -l"
+alias llh="ls -lh"
+alias lll="ls -Al --color|less -R"
+
+alias df='df -h'
+alias du='du -h'
+
+alias h=history
+alias hs='fc -l 0|grep '
+
+alias pu=pushd
+alias po=popd
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....="cd ../../.."
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+
+alias screen='screen -U'
+alias tmux='tmux -2 -u '
+
+alias W='chmod +w'
+alias X='chmod +x'
+alias R='chmod +r'
+
+# buggy typing
+alias :q='exit'
+
+# vim and friends
+if command -v nvim &> /dev/null; then
+  alias vi=nvim
+  alias v=nvim
+elif command -v vim &> /dev/null; then
+  alias vi=vim
+  alias v=vim
+fi
+
+alias gti='git'
+
+if [[ -r /etc/gentoo-release ]] ; then
+  . ~/.sh/aliases.gentoo
+elif [[ -r /etc/debian-release ]]; then
+  . ~/.sh/aliases.debian
+fi
+
+if command -v "direnv"; then
+  alias zrails='zeus rails'
+  alias zrake='zeus rake'
+  alias zcucumber='zeus cucumber'
+  alias zrspec='zeus rspec'
+  alias zserver='zeus server'
+  alias zsidekiq='zeus sidekiq'
+fi
+
+# tmux
+alias tml="tmux list-sessions"
+alias tmk="tmux kill-sesion -t"
+alias tma="tmux -2 attach -t"
+
+# burl shortcuts
+if [ command -v burl &> /dev/null ] ; then
+  # burl aliases
+  alias GET='burl GET'
+  alias HEAD='burl -I'
+  alias POST='burl POST'
+  alias PUT='burl PUT'
+  alias PATCH='burl PATCH'
+  alias DELETE='burl DELETE'
+  alias OPTIONS='burl OPTIONS'
+  export PATH="$PATH:$ZPLUG_BIN"
+fi
+
+
