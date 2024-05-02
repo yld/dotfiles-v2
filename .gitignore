@@ -1,0 +1,18 @@
+*.swp
+/*
+!bin/
+!.bash/
+!.ruby/
+!.sh/
+!.fonts/
+# awesome
+!.config/
+.config/*
+!.config/awesome/
+# vim
+.vim/
+.vim/*
+!.vim/bundle/
+!.vim/bundle/*
+!.zsh
+
