@@ -3,7 +3,6 @@
 -- Add any additional keymaps here
 
 -- working directory shortcuts
--- vim.api.nvim_set_keymap("c", "%%", "<C-R>=expand('%:h').'/'<cr>", { expr = true, noremap = true })
 vim.cmd("cnoremap % <C-R>=expand('%:P').'/'<cr>")
 vim.cmd("cnoremap %% <C-R>=expand('%:h').'/'<cr>")
 
