@@ -13,6 +13,7 @@ return {
     dependencies = {
       "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -24,6 +25,27 @@ return {
             return vim.api.nvim_list_bufs()
           end,
         },
+      })
+
+      local cmp = require("cmp")
+      cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          {
+            name = "cmdline",
+            option = {
+              ignore_cmds = { "Man", "!" },
+            },
+          },
+        }),
       })
     end,
   },
@@ -73,5 +95,12 @@ return {
         end, { "i", "s" }),
       })
     end,
+  },
+  {
+    "hinell/lsp-timeout.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+  },
+  {
+    "soulis-1256/eagle.nvim",
   },
 }

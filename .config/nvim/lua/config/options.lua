@@ -68,3 +68,6 @@ vim.o.background = "dark"
 
 -- clipboard
 vim.o.clipboard = "unnamed"
+
+-- https://github.com/LazyVim/LazyVim/discussions/1770
+vim.g.root_spec = { "cwd" }

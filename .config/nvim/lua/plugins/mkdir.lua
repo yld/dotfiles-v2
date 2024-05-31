@@ -1,6 +1,6 @@
 return {
   {
     "jghauser/mkdir.nvim",
-    enabled = false,
+    enabled = true,
   },
 }

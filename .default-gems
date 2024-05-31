@@ -4,5 +4,6 @@ neovim
 pgsync
 pry-rails
 rubocop
+ruby-lsp
 solargraph
 solargraph-rails
