@@ -12,3 +12,4 @@ python 3.12.2
 elixir 1.16.1-otp-26
 erlang 26.2.5
 terraform 1.7.5
+java openjdk-22.0.1

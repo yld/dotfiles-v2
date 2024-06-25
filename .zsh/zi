@@ -23,7 +23,7 @@ autoload -Uz _zi
 
 # zi ice from"gh-r" as"program" mv"direnv* -> direnv" atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick"direnv" src"zhook.zsh"
 # zi light direnv/direnv
-command -v "direnv" &> /dev/null && eval "$(direnv hook zsh)" @> /dev/null
+command -v "direnv" &> /dev/null && eval "$(direnv hook zsh)" &> /dev/null
 
 zi ice from"gh-r" as"program" mv"fetch* -> fetch"
 zi light "gruntwork-io/fetch"

@@ -85,13 +85,13 @@ if [[ $OS = "OSX" ]] ; then
     PATH="/usr/local/opt/gpg-agent/bin:$PATH"
   fi
 
-  # postgresql 11
-  if [ -d /usr/local/opt/postgresql@14/bin ] ; then
-    PATH="/usr/local/opt/postgresql@14/bin:$PATH"
+  # postgresql 16
+  if [ -d "/usr/local/opt/postgresql@16/bin" ] ; then
+    PATH="/usr/local/opt/postgresql@16/bin:$PATH"
   fi
 
   # libodbc throught brew
-  echo 'export PATH="/opt/homebrew/opt/libiodbc/bin:$PATH"' >> ~/.zshrc
+  export PATH="/opt/homebrew/opt/libiodbc/bin:$PATH"
 
   export LDFLAGS="-L/opt/homebrew/opt/libiodbc/lib"
   export CPPFLAGS="-I/opt/homebrew/opt/libiodbc/include"
