@@ -54,7 +54,6 @@ setopt NOGLOBDOTS
 zmodload zsh/zutil
 
 # help
-unalias run-help
 autoload run-help
 alias help='run-help'
 [ "$OS" = "OSX" ] && HELPDIR=/usr/local/share/zsh/help
@@ -71,8 +70,8 @@ zstyle ':completion:*:*:cdr:*:*' menu selection
 
 ZLS_COLORS=$LS_COLORS
 
-autoload -U promptinit
-promptinit;
+# autoload -U promptinit
+# promptiniwt;
 
 cdpath=(.. ~)
 watch=(notme)
@@ -112,16 +111,7 @@ then
 fi
 ### end ssh hosts completion
 
-# brew
-export HOMEBREW_NO_ENV_HINTS=1
-# coreutils (GNU)
-PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-# GNU sed
-PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
-# GNU awk
-PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
-export  PATH
-
+#
 # asdf
 . "$HOME/.asdf/asdf.sh"
 # append completions to fpath
@@ -158,7 +148,8 @@ source ~/.sh/dotfiles
 . ~/.zsh/functions.d/*
 
 # prompt
-. ~/.zsh/prompt
+eval "$(starship init zsh)"
+# . ~/.zsh/prompt
 
 # zi
 source ~/.zsh/zi

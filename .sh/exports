@@ -63,6 +63,23 @@ export RSYNC_RSH=ssh
 
 [[ -z $HOSTNAME ]] && export HOSTNAME=`hostname`
 if [[ $OS = "OSX" ]] ; then
+  # brew
+  export HOMEBREW_NO_ENV_HINTS=1
+  # libodbc throught brew
+  export PATH="/opt/homebrew/opt/libiodbc/bin:$PATH"
+
+  export LDFLAGS="-L/opt/homebrew/opt/libiodbc/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/libiodbc/include"
+
+  # ruby (asdf/rubybuild/readline)
+  export RUBY_CONFIGURE_OPTS=-–with-readline-dir=”$(brew --prefix readline)”
+
+  # coreutils (GNU)
+  PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+  # GNU sed
+  PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+  # GNU awk
+  PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
   # use brew ctags
   # export PATH="$PATH:/usr/local/bin"
   # gettext
@@ -85,19 +102,9 @@ if [[ $OS = "OSX" ]] ; then
     PATH="/usr/local/opt/gpg-agent/bin:$PATH"
   fi
 
-  # postgresql 16
   if [ -d "/usr/local/opt/postgresql@16/bin" ] ; then
     PATH="/usr/local/opt/postgresql@16/bin:$PATH"
   fi
-
-  # libodbc throught brew
-  export PATH="/opt/homebrew/opt/libiodbc/bin:$PATH"
-
-  export LDFLAGS="-L/opt/homebrew/opt/libiodbc/lib"
-  export CPPFLAGS="-I/opt/homebrew/opt/libiodbc/include"
-
-  # ruby (asdf/rubybuild/readline)
-  export RUBY_CONFIGURE_OPTS=-–with-readline-dir=”$(brew --prefix readline)”
 
 fi
 
@@ -108,10 +115,10 @@ fi
 export PATH="$HOME/.yarn/bin:$PATH"
 test -d "${KREW_ROOT:-$HOME/.krew}" && export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# export PATH="$GEM_HOME/bin:$PATH"
+test -z $GEM_HOME && PATH="$GEM_HOME/bin:$PATH"
 
-# enable quick scripts
-test -d ~/bin && export PATH="$HOME/bin:${PATH}"
+# enable user overides
+test -d ~/bin && PATH="$HOME/bin:${PATH}"
 
 # overcommit
 command -v overcommit && export GIT_TEMPLATE_DIR="$(overcommit --template-dir)"

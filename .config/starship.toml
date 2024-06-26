@@ -1,0 +1,207 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Use the color palette
+palette = "dracula"
+
+format = """
+$os\
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$directory\
+$jobs\
+$battery\
+$time\
+$status\
+$container\
+$shell\
+$character"""
+
+right_format = """$all"""
+# Define Dracula color palette
+[palettes.dracula]
+black = "#282a36"
+background = "#282a36"
+current_line = "#44475a"
+foreground = "#f8f8f2"
+comment = "#6272a4"
+cyan = "#8be9fd"
+green = "#50fa7b"
+orange = "#ffb86c"
+pink = "#ff79c6"
+purple = "#bd93f9"
+red = "#ff5555"
+yellow = "#f1fa8c"
+
+[aws]
+style = "bold orange"
+
+[character]
+error_symbol = "[✖](bold red)"
+success_symbol = "[❯](bold green)"
+vimcmd_symbol = '[](bold green)'
+vimcmd_replace_one_symbol = '[](bold cyan)'
+vimcmd_replace_symbol = '[](bold purple)'
+vimcmd_visual_symbol = '[](bold yellow)'
+
+[cmd_duration]
+style = "bold yellow"
+format = '[\($duration\)]($style) '
+
+[docker_context]
+disabled = true
+
+[directory]
+style = "bold cyan"
+truncation_length = 8
+truncation_symbol = ''
+before_repo_root_style = 'bold white'
+repo_root_style = 'bold pink'
+truncate_to_repo = false
+
+[git_branch]
+always_show_remote = true
+style = "bold pink"
+format = '[$symbol\[$branch(:$remote_branch)\]]($style) '
+
+[git_status]
+style = "bold red"
+ignore_submodules = true
+deleted = '[󰧧\($count\)](orange)'
+modified = '[\($count\)](orange)'
+renamed = '[\($count\)](orange)'
+staged = '[\($count\)](yellow)'
+stashed = '[\($count\)](green)'
+untracked = '[\($count\)](red)'
+format = '([$count\[$all_status$ahead_behind\]]($style) )'
+
+[hostname]
+style = "bold purple"
+
+[jobs]
+symbol = ''
+number_threshold = 1
+symbol_threshold = 1
+style = 'fg:yellow'
+format = '[$number]($style) '
+# format = '[\($number\)$symbol]($style) '
+# Replace the '❯' symbol in the prompt with '➜'
+# [character] # The name of the module we are configuring is 'character'
+# success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+
+[nodejs]
+detect_files = ['package.json', '.node-version', '!.zshrc']
+
+[os]
+format = "[$symbol]($style)"
+style = "bold blue"
+disabled = false
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[ruby]
+symbol = '🔺 '
+disabled = true
+
+[username]
+format = "[$user]($style) on "
+style_user = "bold cyan"
+
+[status]
+# style = 'bg:yellow'
+# symbol = '❌'
+# format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
+format = '[\($status\)](red)'
+disabled = false
+
+[custom.historyindex]
+# command = """print -P '%h'"""
+command = '''echo "$HISTCMD"'''
+format = ' bug [$output]($style)'
+when = true
+use_stdin = false
+
