@@ -8,47 +8,62 @@ return {
       },
     },
   },
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-emoji",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
-    },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "emoji" })
-      table.insert(opts.sources, {
-        name = "buffer",
-        option = {
-          get_bufnrs = function()
-            return vim.api.nvim_list_bufs()
-          end,
-        },
-      })
-
-      local cmp = require("cmp")
-      cmp.setup.cmdline("/", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = "buffer" },
-        },
-      })
-      cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-        }, {
-          {
-            name = "cmdline",
-            option = {
-              ignore_cmds = { "Man", "!" },
-            },
-          },
-        }),
-      })
-    end,
-  },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   dependencies = { "hrsh7th/cmp-emoji" },
+  --   opts = function(_, opts)
+  --     table.insert(opts.sources, { name = "nvim_lsp" }),
+  --     -- table.insert(opts.sources, {
+  --     --   name = "buffer",
+  --     --   option = {
+  --     --     get_bufnrs = function()
+  --     --       return vim.api.nvim_list_bufs()
+  --     --     end,
+  --     --   },
+  --     -- })
+  --   end,
+  -- },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   dependencies = {
+  --     "hrsh7th/cmp-emoji",
+  --     "hrsh7th/cmp-buffer",
+  --     "hrsh7th/cmp-cmdline",
+  --   },
+  --   ---@param opts cmp.ConfigSchema
+  --   opts = function(_, opts)
+  --     table.insert(opts.sources, { name = "emoji" })
+  --     table.insert(opts.sources, {
+  --       name = "buffer",
+  --       option = {
+  --         get_bufnrs = function()
+  --           return vim.api.nvim_list_bufs()
+  --         end,
+  --       },
+  --     })
+  --
+  --     local cmp = require("cmp")
+  --     cmp.setup.cmdline("/", {
+  --       mapping = cmp.mapping.preset.cmdline(),
+  --       sources = {
+  --         { name = "buffer" },
+  --       },
+  --     })
+  --     cmp.setup.cmdline(":", {
+  --       mapping = cmp.mapping.preset.cmdline(),
+  --       sources = cmp.config.sources({
+  --         { name = "path" },
+  --       }, {
+  --         {
+  --           name = "cmdline",
+  --           option = {
+  --             ignore_cmds = { "Man", "!" },
+  --           },
+  --         },
+  --       }),
+  --     })
+  --   end,
+  -- },
   {
     "L3MON4D3/LuaSnip",
     keys = function()
@@ -73,9 +88,10 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+            -- cmp.confirm({ select = true })
             cmp.select_next_item()
-          -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-          -- this way you will only jump inside the snippet region
+            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+            -- this way you will only jump inside the snippet region
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_before() then

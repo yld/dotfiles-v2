@@ -66,7 +66,9 @@ zi wait lucid for \
   voronkovich/gitignore.plugin.zsh
 
 zi light-mode for z-shell/z-a-meta-plugins @annexes @ext-git
+zi load dracula/zsh
 
+ZSH_THEME="dracula"
 export ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 

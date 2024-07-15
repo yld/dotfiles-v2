@@ -2,6 +2,10 @@ local lspconfig = require("lspconfig")
 
 return {
   {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "ruby" } },
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       format = { timeout_ms = 1500 },
@@ -26,6 +30,25 @@ return {
           autostart = false,
         },
       },
+    },
+  },
+  {
+    "suketa/nvim-dap-ruby",
+    config = function()
+      require("dap-ruby").setup()
+    end,
+  },
+  {
+    "olimorris/neotest-rspec",
+  },
+  {
+    "mfussenegger/nvim-dap",
+    optional = true,
+    dependencies = {
+      "suketa/nvim-dap-ruby",
+      config = function()
+        require("dap-ruby").setup()
+      end,
     },
   },
   {

@@ -90,9 +90,9 @@ $custom\
 $sudo\
 $cmd_duration\
 $line_break\
+$battery\
 $directory\
 $jobs\
-$battery\
 $time\
 $status\
 $container\
@@ -118,6 +118,9 @@ yellow = "#f1fa8c"
 [aws]
 style = "bold orange"
 
+[battery]
+format = '[$symbol$percentage\)]($style) '
+
 [character]
 error_symbol = "[✖](bold red)"
 success_symbol = "[❯](bold green)"
@@ -138,15 +141,27 @@ style = "bold cyan"
 truncation_length = 8
 truncation_symbol = ''
 before_repo_root_style = 'bold white'
-repo_root_style = 'bold pink'
+repo_root_style = 'bold purple'
 truncate_to_repo = false
+
+[dotnet]
+detect_files = [
+  'global.json',
+  '!project.json',
+  'Directory.Build.props',
+  'Directory.Build.targets',
+  'Packages.props',
+]
 
 [git_branch]
 always_show_remote = true
-style = "bold pink"
-format = '[$symbol\[$branch(:$remote_branch)\]]($style) '
+symbol = " "
+style = "white"
+format = '[$symbol]($style)\[[$branch](yellow)[(:$remote_branch)](cyan)\] '
+ignore_branches = ['master', 'main']
 
 [git_status]
+format = '($conflicted )($stashed )($deleted )($renamed )($modified )($typechanged )($staged )($untracked )($ahead_behind)'
 style = "bold red"
 ignore_submodules = true
 deleted = '[󰧧\($count\)](orange)'
@@ -155,7 +170,7 @@ renamed = '[\($count\)](orange)'
 staged = '[\($count\)](yellow)'
 stashed = '[\($count\)](green)'
 untracked = '[\($count\)](red)'
-format = '([$count\[$all_status$ahead_behind\]]($style) )'
+# format = '([$count\[$all_status$ahead_behind\]]($style) )'
 
 [hostname]
 style = "bold purple"
@@ -173,11 +188,12 @@ format = '[$number]($style) '
 
 [nodejs]
 detect_files = ['package.json', '.node-version', '!.zshrc']
+disabled = true
 
 [os]
 format = "[$symbol]($style)"
 style = "bold blue"
-disabled = false
+disabled = true
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -199,9 +215,10 @@ format = '[\($status\)](red)'
 disabled = false
 
 [custom.historyindex]
-# command = """print -P '%h'"""
-command = '''echo "$HISTCMD"'''
+command = """print -P '%h'"""
+# command = '''echo $HISTCMwD"'''
 format = ' bug [$output]($style)'
 when = true
-use_stdin = false
-
+# use_stdin = false
+shell = ['zsh']
+disabled = true

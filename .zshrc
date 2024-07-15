@@ -148,6 +148,7 @@ source ~/.sh/dotfiles
 . ~/.zsh/functions.d/*
 
 # prompt
+# source "$HOME/.zsh/spaceship/spaceship.zsh"
 eval "$(starship init zsh)"
 # . ~/.zsh/prompt
 
