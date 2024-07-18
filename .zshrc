@@ -149,8 +149,20 @@ source ~/.sh/dotfiles
 
 # prompt
 # source "$HOME/.zsh/spaceship/spaceship.zsh"
-eval "$(starship init zsh)"
 # . ~/.zsh/prompt
 
 # zi
 source ~/.zsh/zi
+
+function blastoff(){
+  echo "🚀"
+}
+function set_win_title(){
+  echo -ne "\033]0; $(basename "$PWD") \007"
+}
+starship_precmd_user_func="blastoff"
+starship_precmd_user_func="set_win_title"
+
+
+eval "$(starship init zsh)"
+
