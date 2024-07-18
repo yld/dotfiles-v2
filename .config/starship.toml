@@ -153,12 +153,16 @@ detect_files = [
   'Packages.props',
 ]
 
+[elixir]
+disabled = true
+
 [git_branch]
 always_show_remote = true
 symbol = " "
 style = "white"
 format = '[$symbol]($style)\[[$branch](yellow)[(:$remote_branch)](cyan)\] '
-ignore_branches = ['master', 'main']
+# ignore_branches = ['master', 'main']
+ignore_branches = []
 
 [git_status]
 format = '($conflicted )($stashed )($deleted )($renamed )($modified )($typechanged )($staged )($untracked )($ahead_behind)'
