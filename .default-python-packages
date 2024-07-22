@@ -1,1 +1,8 @@
+ansible
+autopep8
+grip
 neovim
+pynvim
+virtualenv
+virtualenv-clone
+virtualenvwrapper

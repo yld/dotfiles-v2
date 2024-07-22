@@ -1,2 +1,11 @@
 neovim
 jest
+css-lint
+sass-lint
+eslint
+typescript-eslint
+babel-eslint
+stylelint
+prettier
+jsonlint
+ember-template-lint

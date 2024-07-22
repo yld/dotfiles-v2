@@ -181,7 +181,7 @@ dotfiles_check_tools() {
 		echo_wait 'Force xcode install (you must maybe wait)'
 		xcode-select --install &>/dev/null
 		echo_ok
-		for TOOL in htop gawk gnu-sed wxmac neovim tree wget tmux pwgen shellcheck jq keychain gpg autoconf gnu-tar the_silver_searcher coreutils sqlite3 xz zlib fzf terminal-notifier ctags pyvim; do
+		for TOOL in libiodbc starship rg fd htop gawk gnu-sed wxmac neovim tree wget tmux pwgen shellcheck jq keychain gpg autoconf gnu-tar the_silver_searcher coreutils sqlite3 xz zlib fzf terminal-notifier ctags pyvim; do
 			brew_check_and_install "$TOOL"
 		done
 		;;

@@ -7,3 +7,15 @@ rubocop
 ruby-lsp
 solargraph
 solargraph-rails
+gem-ctags
+gem-browse
+pry
+haml_lint
+brakeman
+rubocop-rspec
+rails_best_practices
+sqlint
+erubi
+mdl
+gist
+terraform_landscape
