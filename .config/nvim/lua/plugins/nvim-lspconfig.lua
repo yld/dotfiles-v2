@@ -5,6 +5,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      autoformat = false,
       format = { timeout_ms = 1500 },
       format_notify = true,
       servers = {
