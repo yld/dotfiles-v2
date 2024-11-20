@@ -72,7 +72,8 @@ if [[ $OS = "OSX" ]] ; then
   export CPPFLAGS="-I/opt/homebrew/opt/libiodbc/include"
 
   # ruby (asdf/rubybuild/readline)
-  export RUBY_CONFIGURE_OPTS=-–with-readline-dir=”$(brew --prefix readline)”
+  # buguy, disabled
+  # export RUBY_CONFIGURE_OPTS=-–with-readline-dir=”$(brew --prefix readline)”
 
   # coreutils (GNU)
   PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
