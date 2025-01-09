@@ -10,4 +10,4 @@ fi
 
 # see /etc/zprofile
 . ~/.sh/exports
-
+. ~/.zsh/exports

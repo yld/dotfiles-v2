@@ -25,6 +25,8 @@ alias hs='fc -l 0|grep '
 alias pu=pushd
 alias po=popd
 
+alias ag=rg
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....="cd ../../.."

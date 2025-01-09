@@ -157,7 +157,7 @@ detect_files = [
 disabled = true
 
 [git_branch]
-always_show_remote = true
+always_show_remote = false
 symbol = " "
 style = "white"
 format = '[$symbol]($style)\[[$branch](yellow)[(:$remote_branch)](cyan)\] '
@@ -165,7 +165,8 @@ format = '[$symbol]($style)\[[$branch](yellow)[(:$remote_branch)](cyan)\] '
 ignore_branches = []
 
 [git_status]
-format = '($conflicted )($stashed )($deleted )($renamed )($modified )($typechanged )($staged )($untracked )($ahead_behind)'
+# format = '($conflicted )($stashed )($deleted )($renamed )($modified )($typechanged )($staged )($untracked )($ahead_behind)'
+format = '($stashed )($deleted )($renamed )($modified )($typechanged )($staged )($untracked )'
 style = "bold red"
 ignore_submodules = true
 deleted = '[󰧧\($count\)](orange)'

@@ -1,4 +1,5 @@
 # zsh options
+
 ### options ###
 setopt POSIX_BUILTINS
 setopt POSIX_ALIASES
@@ -117,7 +118,8 @@ fi
 # append completions to fpath
 fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
-autoload -Uz compinit && compinit
+# compinit is done in ~/.zsh/zi
+# autoload -Uz compinit && compinit
 
 # vim keybinding
 bindkey -v
@@ -165,4 +167,3 @@ starship_precmd_user_func="set_win_title"
 
 
 eval "$(starship init zsh)"
-

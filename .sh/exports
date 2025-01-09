@@ -1,7 +1,6 @@
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=2
 
 umask 002
-limit coredumpsize 0
 
 OS="";
 case "$OSTYPE" in
@@ -50,9 +49,9 @@ fi
 #   export MOST_SWITCHES=" -s"
 #   export MOST_EDITO="$EDITOR +%d %s"
 # el
-if [[ -x $(command -v less) ]] then
+if [[ -x $(command -v less) ]] ; then
   export PAGER="$(command -v less) -F -i -S -w -X -R"
-elif [[ -x $(command -v more) ]] then
+elif [[ -x $(command -v more) ]] ; then
   export PAGER='/usr/bin/more'
 fi
 
@@ -70,10 +69,6 @@ if [[ $OS = "OSX" ]] ; then
 
   export LDFLAGS="-L/opt/homebrew/opt/libiodbc/lib"
   export CPPFLAGS="-I/opt/homebrew/opt/libiodbc/include"
-
-  # ruby (asdf/rubybuild/readline)
-  # buguy, disabled
-  # export RUBY_CONFIGURE_OPTS=-–with-readline-dir=”$(brew --prefix readline)”
 
   # coreutils (GNU)
   PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
@@ -108,9 +103,6 @@ if [[ $OS = "OSX" ]] ; then
   fi
 
 fi
-
-[ -f ~/.asdf/plugins/golang/set-env.zsh ] && . ~/.asdf/plugins/golang/set-env.zsh
-[ -f ~/.asdf/plugins/java/set-java-home.zsh ] && . ~/.asdf/plugins/java/set-java-home.zsh
 
 # yarn path
 export PATH="$HOME/.yarn/bin:$PATH"
