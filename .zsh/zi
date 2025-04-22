@@ -12,10 +12,6 @@ autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 ### End of Zinit's installer chunk
 
-# asdf
-# zinit ice src="asdf.sh" atinit'zpcompinit; zpcdreplay' nocd
-# zinit light asdf-vm/asdf
-
 # direnv
 # zi ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
 #   atpull'%atclone' src"zhook.zsh"
@@ -44,7 +40,6 @@ zi wait lucid atload"zicompinit; zicdreplay" blockf for \
   OMZP::rails \
   OMZP::terraform
 
-  # OMZP::asdf \
   # OMZ::autopep8 \
   # OMZP::gem \
   # OMZP::heroku \

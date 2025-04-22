@@ -2,6 +2,8 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+
 local is_wsl = vim.fn.has("wsl") == 1
 local is_mac = vim.fn.has("macunix") == 1
 local is_linux = not is_wsl and not is_mac

@@ -112,11 +112,12 @@ then
 fi
 ### end ssh hosts completion
 
-#
+# mise
+eval "$(mise activate zsh)"
 # asdf
-. "$HOME/.asdf/asdf.sh"
+# . "$HOME/.asdf/asdf.sh"
 # append completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
+# fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
 # compinit is done in ~/.zsh/zi
 # autoload -Uz compinit && compinit

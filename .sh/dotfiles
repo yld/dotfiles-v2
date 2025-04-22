@@ -42,7 +42,7 @@ dotfiles_git_command() {
 dotfiles_update() {
 	dotfiles_check_requirements
 
-	dotfiles_asdf
+	# dotfiles_asdf
 	# dotfiles_zplug
 	dotfiles_nvim
 	dotfiles_yarn
@@ -81,20 +81,20 @@ dotfiles_nvim() {
 # }
 
 dotfiles_asdf() {
-	if [[ ! -d $HOME/.asdf ]]; then
-		echo_wait "Installaing asdf"
-		git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.6
-		# ZSH only
-		echo_ok
-	fi
-
-	# shellcheck source=/dev/null
-	. "$HOME/.asdf/asdf.sh"
-
-	echo_wait "Downloading/updating nodejs PGP keys"
-	# Node.js release team's OpenPGP keys
-	bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring &>/dev/null
-	echo_ok
+	# if [[ ! -d $HOME/.asdf ]]; then
+	# 	echo_wait "Installaing asdf"
+	# 	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.6
+	# 	# ZSH only
+	# 	echo_ok
+	# fi
+	#
+	# # shellcheck source=/dev/null
+	# . "$HOME/.asdf/asdf.sh"
+	#
+	# echo_wait "Downloading/updating nodejs PGP keys"
+	# # Node.js release team's OpenPGP keys
+	# bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring &>/dev/null
+	# echo_ok
 
 	# echo_wait "Configuring npm common packages"
 	# local DEFAULT_NODE_ASDF_PKG_FILE="${HOME}/.default-npm-packages"
@@ -120,21 +120,21 @@ dotfiles_asdf() {
 	# done
 	# echo_ok
 
-	echo_wait "Installing asdf plugins"
-	awk '{print("asdf plugin-add "$1)}' ~/.tool-versions | sh &>/dev/null
-	echo_ok
-
-	echo_wait "Updating asdf plugins"
-	asdf plugin-update --all &>/dev/null
-	echo_ok
-
-	echo_wait "Installing asdf plugins versions"
-	awk '{print("asdf install "$1" "$2)}' ~/.tool-versions | sh 1>/dev/null || echo_ko
-	echo_ok
-
-	echo_wait "Reshim asdf"
-	awk '{print("asdf reshim "$1" "$2)}' ~/.tool-versions | sh || echo_ko
-	echo_ok
+	# echo_wait "Installing asdf plugins"
+	# awk '{print("asdf plugin-add "$1)}' ~/.tool-versions | sh &>/dev/null
+	# echo_ok
+	#
+	# echo_wait "Updating asdf plugins"
+	# asdf plugin-update --all &>/dev/null
+	# echo_ok
+	#
+	# echo_wait "Installing asdf plugins versions"
+	# awk '{print("asdf install "$1" "$2)}' ~/.tool-versions | sh 1>/dev/null || echo_ko
+	# echo_ok
+	#
+	# echo_wait "Reshim asdf"
+	# awk '{print("asdf reshim "$1" "$2)}' ~/.tool-versions | sh || echo_ko
+	# echo_ok
 }
 
 dotfiles_yarn() {
