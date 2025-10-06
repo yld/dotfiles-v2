@@ -130,3 +130,4 @@ yarn-debug.log*
 
 # tags (neovim plugin)
 tags
+.DS_Store

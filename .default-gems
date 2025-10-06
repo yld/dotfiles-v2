@@ -15,8 +15,6 @@ rubocop
 rubocop-rails
 rubocop-rspec
 ruby-lsp
-solargraph
-solargraph-rails
 sqlint
 terraform_landscape
 rubocop-rails

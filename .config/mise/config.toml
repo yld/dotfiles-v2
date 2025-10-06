@@ -1,17 +1,13 @@
 [tools]
-kind = "0.22.0"
-kubectx = "0.9.5"
-node = "20.10.0"
-ruby = "3.3.0"
-yarn = "1.22.19"
-k9s = "0.32.3"
-flux2 = "2.2.3"
-github-cli = "2.45.0"
-lua = "5.4.6"
-direnv = "2.34.0"
 elixir = "latest"
-python = "3.12.2"
-terraform = "1.7.5"
 erlang = "latest"
-gcloud = "506.0.0"
-java = "openjdk-22.0.1"
+java = "openjdk-25.0.0"
+ruby = 'latest'
+node = { version = "lts", postinstall = "corepack enable" }
+zig = "latest"
+python = "3"
+lua = "latest"
+
+[hooks]
+enter = "echo 'I entered the project'"
+leave = "echo 'I left the project'"

@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     opts = {
       mappings = {
         ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\`].", register = { cr = false } },

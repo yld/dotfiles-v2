@@ -1,0 +1,23 @@
+[tools]
+direnv = "2.34.0"
+elixir = "1.14.5-otp-25"
+erlang = "latest"
+flux2 = "2.2.3"
+gcloud = "506.0.0"
+github-cli = "2.45.0"
+java = "openjdk-22.0.1"
+k9s = "0.32.3"
+kind = "0.22.0"
+kubectx = "0.9.5"
+lua = "5.4.6"
+node = "lts"
+python = "3.12.2"
+ruby = "3.3.5"
+terraform = "1.7.5"
+zig = "latest"
+
+[alias.node.versions]
+jod = '22'
+krypton = "24"
+lithium = '26'
+magnesium = '28'
