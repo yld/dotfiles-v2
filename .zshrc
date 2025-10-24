@@ -98,11 +98,9 @@ type brew &>/dev/null && FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 
 command -v kops &> /dev/null && source <(kops completion zsh)
 
-# SSH keYs
-# FIXME replace with ~/.sh/keychain
-eval "$(ssh-agent -s)" &> /dev/null
-ssh-add --apple-use-keychain ~/.ssh/id_inthememory &> /dev/null
-#
+# SSH keys
+. ~/.sh/keychain.sh
+
 ### ssh hosts completion
 if [[ -r $HOME/.ssh/known_hosts ]];
 then

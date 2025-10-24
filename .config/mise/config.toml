@@ -7,7 +7,12 @@ node = { version = "lts", postinstall = "corepack enable" }
 zig = "latest"
 python = "3"
 lua = "latest"
+crystal = "latest"
+rust = "latest"
 
 [hooks]
 enter = "echo 'I entered the project'"
 leave = "echo 'I left the project'"
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby", "node", "crystal"]

@@ -6,11 +6,12 @@ IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 
 begin
-  require 'awesome_print'
-  AwesomePrint.irb!
+  require 'amazing_print'
+  AmazingPrint.irb!
+  AmazingPrint.rdbg!
 rescue LoadError
-  puts 'please gem install awesome_print'
-end 
+  puts 'please gem install amazing_print'
+end
 
 require 'benchmark'
 
@@ -28,25 +29,25 @@ if defined? Pry
   Pry.start
   exit
 else
-if defined?(rails_env) && rails_env == 'test'
-  begin
-    require 'factory_bot'
-    factorybot.find_definitions
-    include factorybot::syntax::methods
-  rescue standarderror
-    puts 'please gem install factory_bot'
+  if defined?(rails_env) && rails_env == 'test'
+    begin
+      require 'factory_bot'
+      factorybot.find_definitions
+      include factorybot.syntax.methods
+    rescue standarderror
+      puts 'please gem install factory_bot'
+    end
   end
-end
 
-if defined?(rails_env) && rails_env == 'test'
-  begin
-    require 'factory_bot'
-    factorybot.find_definitions
-    include factorybot::syntax::methods
-  rescue standarderror
-    puts 'please gem install factory_bot'
+  if defined?(rails_env) && rails_env == 'test'
+    begin
+      require 'factory_bot'
+      factorybot.find_definitions
+      include factorybot.syntax.methods
+    rescue standarderror
+      puts 'please gem install factory_bot'
+    end
   end
-end
 
   def time(times = 1)
     result = nil
