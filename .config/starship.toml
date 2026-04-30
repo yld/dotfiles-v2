@@ -34,7 +34,6 @@ $daml\
 $dart\
 $deno\
 $dotnet\
-$elixir\
 $elm\
 $erlang\
 $fennel\
@@ -48,7 +47,7 @@ $java\
 $julia\
 $kotlin\
 $gradle\
-$lua\
+# $lua\
 $nim\
 $nodejs\
 $ocaml\
@@ -62,7 +61,6 @@ $quarto\
 $raku\
 $rlang\
 $red\
-$ruby\
 $rust\
 $scala\
 $solidity\
@@ -82,10 +80,10 @@ $aws\
 $gcloud\
 $openstack\
 $azure\
+$time\
 $nats\
 $direnv\
 $env_var\
-$crystal\
 $custom\
 $sudo\
 $cmd_duration\
@@ -93,14 +91,23 @@ $line_break\
 $battery\
 $directory\
 $jobs\
-$time\
 $status\
 $container\
 $shell\
 $character"""
 
-right_format = """$all"""
+right_format = """
+$crystal\
+$elixir\
+$ruby\
+$all"""
+
+continuation_prompt = '▶▶ '
+
 # Define Dracula color palette
+[time]
+disabled = false
+
 [palettes.dracula]
 black = "#282a36"
 background = "#282a36"
@@ -156,6 +163,9 @@ detect_files = [
 [elixir]
 disabled = true
 
+[gcloud]
+disabled = true
+
 [git_branch]
 always_show_remote = false
 symbol = " "
@@ -180,6 +190,9 @@ untracked = '[\($count\)](red)'
 [hostname]
 style = "bold purple"
 
+# [kubernetes]
+# disabled = true
+
 [jobs]
 symbol = ''
 number_threshold = 1
@@ -190,6 +203,9 @@ format = '[$number]($style) '
 # Replace the '❯' symbol in the prompt with '➜'
 # [character] # The name of the module we are configuring is 'character'
 # success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+
+[lua]
+disabled = true
 
 [nodejs]
 detect_files = ['package.json', '.node-version', '!.zshrc']
@@ -205,7 +221,7 @@ disabled = true
 disabled = true
 
 [ruby]
-symbol = '🔺 '
+symbol = '💎 '
 disabled = true
 
 [username]

@@ -48,3 +48,10 @@ chpwd() {
       ;;
   esac
 }
+
+tktab() {
+  NAME=${1:-tab}
+
+  kitty @ set-tab-title "${NAME}"
+  tmux new-session -A -s "${NAME}"
+}

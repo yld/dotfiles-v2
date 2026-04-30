@@ -14,3 +14,5 @@ require("config.lazy")
 --
 -- -- shortcuts
 -- vim.api.nvim_set_keymap("c", "%%", "<C-R>=expand('%:h').'/'<cr>", { silent = true, noremap = true })
+-- https://github.com/yetone/avante.nvim
+vim.opt.laststatus = 3

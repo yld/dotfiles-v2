@@ -2,13 +2,18 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
-vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+local home = vim.env.HOME
+
+vim.env.PATH = home .. "/.local/share/mise/shims:" .. vim.env.PATH
+
+local mise_python3 = home .. "/.local/share/mise/installs/python/3/bin/python3"
+if vim.fn.executable(mise_python3) == 1 then
+  vim.g.python3_host_prog = mise_python3
+end
 
 local is_wsl = vim.fn.has("wsl") == 1
 local is_mac = vim.fn.has("macunix") == 1
 local is_linux = not is_wsl and not is_mac
-
-local home = vim.env.HOME
 
 -- clipboard
 -- https://stackoverflow.com/questions/30691466/what-is-difference-between-vims-clipboard-unnamed-and-unnamedplus-settings
@@ -55,7 +60,6 @@ vim.o.directory = home .. "/.vim/swp"
 
 -- bells
 vim.go.errorbells = true
-vim.go.belloff = "all"
 
 --  Text, tab and indent related
 vim.o.tabstop = 2
@@ -68,9 +72,6 @@ vim.o.wrap = true
 -- background
 vim.o.background = "dark"
 
--- clipboard
-vim.o.clipboard = "unnamed"
-
 -- https://github.com/LazyVim/LazyVim/discussions/1770
 vim.g.root_spec = { "cwd" }
 
@@ -80,3 +81,9 @@ vim.g.lazyvim_ruby_formatter = "rubocop"
 
 -- AI
 vim.g.ai_cmp = false
+
+-- case
+vim.opt.ignorecase = false
+
+-- LSP logging: default level INFO floods the log with copilot/ruby-lsp stderr noise
+vim.lsp.log.set_level("WARN")

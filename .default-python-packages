@@ -6,4 +6,4 @@ pynvim
 virtualenv
 virtualenv-clone
 virtualenvwrapper
-yamlint
+yamllint

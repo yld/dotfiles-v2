@@ -1,3 +1,4 @@
+language = fr
 clipboard-read = allow
 clipboard-write = allow
 copy-on-select = clipboard
@@ -6,5 +7,13 @@ cursor-style = block
 cursor-style-blink = true
 scrollback-limit = 134217728
 theme = Dracula
+macos-titlebar-style = tabs
+macos-option-as-alt = right
+macos-icon = chalkboard
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
 
+quick-terminal-position = top
+quick-terminal-size = 60%
 
+shell-integration-features = true

@@ -1,0 +1,88 @@
+{
+ "ConfigPath": {
+  "Path": "/Users/yves/.config/containers/podman/machine/qemu/podman-machine-default.json"
+ },
+ "CmdLine": [
+  "/opt/podman/qemu/bin/qemu-system-aarch64",
+  "-m",
+  "2048",
+  "-smp",
+  "1",
+  "-fw_cfg",
+  "name=opt/com.coreos/config,file=/Users/yves/.config/containers/podman/machine/qemu/podman-machine-default.ign",
+  "-qmp",
+  "unix:/var/folders/16/n97jpdcx3vlcv1n_5htfdy_c0000gn/T/podman/qmp_podman-machine-default.sock,server=on,wait=off",
+  "-netdev",
+  "socket,id=vlan,fd=3",
+  "-device",
+  "virtio-net-pci,netdev=vlan,mac=5a:94:ef:e4:0c:ee",
+  "-device",
+  "virtio-serial",
+  "-chardev",
+  "socket,path=/var/folders/16/n97jpdcx3vlcv1n_5htfdy_c0000gn/T/podman/podman-machine-default_ready.sock,server=on,wait=off,id=apodman-machine-default_ready",
+  "-device",
+  "virtserialport,chardev=apodman-machine-default_ready,name=org.fedoraproject.port.0",
+  "-pidfile",
+  "/var/folders/16/n97jpdcx3vlcv1n_5htfdy_c0000gn/T/podman/podman-machine-default_vm.pid",
+  "-accel",
+  "hvf",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "host",
+  "-M",
+  "virt,highmem=on",
+  "-drive",
+  "file=/opt/podman/qemu/share/qemu/edk2-aarch64-code.fd,if=pflash,format=raw,readonly=on",
+  "-drive",
+  "file=/Users/yves/.local/share/containers/podman/machine/qemu/podman-machine-default_ovmf_vars.fd,if=pflash,format=raw",
+  "-virtfs",
+  "local,path=/Users/yves,mount_tag=vol0,security_model=mapped-xattr",
+  "-drive",
+  "if=virtio,file=/Users/yves/.local/share/containers/podman/machine/qemu/podman-machine-default_fedora-coreos-37.20230303.2.0-qemu.aarch64.qcow2"
+ ],
+ "Rootful": false,
+ "UID": 501,
+ "IgnitionFilePath": {
+  "Path": "/Users/yves/.config/containers/podman/machine/qemu/podman-machine-default.ign"
+ },
+ "ImageStream": "testing",
+ "ImagePath": {
+  "Path": "/Users/yves/.local/share/containers/podman/machine/qemu/podman-machine-default_fedora-coreos-37.20230303.2.0-qemu.aarch64.qcow2"
+ },
+ "Mounts": [
+  {
+   "ReadOnly": false,
+   "Source": "/Users/yves",
+   "Tag": "vol0",
+   "Target": "/Users/yves",
+   "Type": "9p"
+  }
+ ],
+ "Name": "podman-machine-default",
+ "PidFilePath": {
+  "Path": "/var/folders/16/n97jpdcx3vlcv1n_5htfdy_c0000gn/T/podman/podman-machine-default_proxy.pid"
+ },
+ "VMPidFilePath": {
+  "Path": "/var/folders/16/n97jpdcx3vlcv1n_5htfdy_c0000gn/T/podman/podman-machine-default_vm.pid"
+ },
+ "QMPMonitor": {
+  "Address": {
+   "Path": "/var/folders/16/n97jpdcx3vlcv1n_5htfdy_c0000gn/T/podman/qmp_podman-machine-default.sock"
+  },
+  "Network": "unix",
+  "Timeout": 2000000000
+ },
+ "ReadySocket": {
+  "Path": "/var/folders/16/n97jpdcx3vlcv1n_5htfdy_c0000gn/T/podman/podman-machine-default_ready.sock"
+ },
+ "CPUs": 1,
+ "DiskSize": 100,
+ "Memory": 2048,
+ "IdentityPath": "/Users/yves/.ssh/podman-machine-default",
+ "Port": 49839,
+ "RemoteUsername": "core",
+ "Starting": false,
+ "Created": "2023-03-16T21:26:44.141765+01:00",
+ "LastUp": "2023-03-16T21:26:44.141765+01:00"
+}

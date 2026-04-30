@@ -166,3 +166,39 @@ starship_precmd_user_func="set_win_title"
 
 
 eval "$(starship init zsh)"
+
+# ghostty
+if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+  source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
+fi
+# eval "$(atuin init zsh)"
+
+. "$HOME/.local/bin/env"
+
+# Hermes Agent — ensure ~/.local/bin is on PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+
+
+
+
+
+
+
+
+
+# >>> opentmux >>>
+export OPENCODE_PORT=4096
+alias opencode='opentmux'
+# <<< opentmux <<<
+
+
+
+
+
+
+
+# >>> opencode-agent-tmux >>>
+export OPENCODE_PORT=4096
+alias opencode='opencode-tmux'
+# <<< opencode-agent-tmux <<<

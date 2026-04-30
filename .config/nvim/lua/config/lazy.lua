@@ -13,21 +13,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
-    -- { "LazyVim/LazyVim" },
+    -- LazyVim core + plugins. All LazyVim extras are managed via :LazyExtras (lazyvim.json).
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- { import = "lazyvim.plugins.extras.lang.elixir" },
-    { import = "lazyvim.plugins.extras.lang.json" },
-    { import = "lazyvim.plugins.extras.lsp.none-ls" },
-    { import = "lazyvim.plugins.extras.lang.sql" },
-    { import = "lazyvim.plugins.extras.lang.typescript" },
-    { import = "lazyvim.plugins.extras.lang.yaml" },
-    { import = "lazyvim.plugins.extras.linting.eslint" },
-    { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    { import = "lazyvim.plugins.extras.vscode" },
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- import/override with your plugins
+    -- Your local overrides / additional plugins
     { import = "plugins" },
   },
 })

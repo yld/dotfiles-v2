@@ -54,7 +54,6 @@ Sessionx.vim
 .netrwhist
 *~
 # Auto-generated tag files
-tags
 # Persistent undo
 [._]*.un~
 
@@ -128,6 +127,4 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 
-# tags (neovim plugin)
-tags
 .DS_Store

@@ -10,10 +10,10 @@ return {
     },
     opts = {
       adapters = {
-        "neotest-plenary",
-        "neotest-rspec",
-        "neotest-elixir",
-        "neotest-jest",
+        ["neotest-plenary"] = {},
+        ["neotest-rspec"] = {},
+        ["neotest-elixir"] = {},
+        ["neotest-jest"] = {},
       },
     },
   },

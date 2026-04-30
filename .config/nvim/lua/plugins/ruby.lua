@@ -1,5 +1,3 @@
-local lspconfig = require("lspconfig")
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -7,30 +5,30 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      format = { timeout_ms = 1500 },
-      format_notify = true,
-      servers = {
-        rubocop = {
-          -- See: https://docs.rubocop.org/rubocop/usage/lsp.html
-          name = "rubocop",
-          cmd = { "bundle", "exec", "rubocop" },
-          -- cmd = { "bundle", "exec", "rubocop", "--lsp" },
-          root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
-        },
-        ruby_lsp = {
-          name = "ruby-lsp",
-          -- cmd = { "bundle", "exec", "ruby-lsp" },
-          -- init_options = {
-          --   formatter = "auto",
-          -- },
-        },
-        solargraph = {
-          name = "solargraph",
-          autostart = false,
-        },
-      },
-    },
+    opts = function(_, opts)
+      local root_pattern = require("lspconfig.util").root_pattern
+
+      opts.format = { timeout_ms = 1500 }
+      opts.format_notify = true
+      opts.servers = opts.servers or {}
+      opts.servers.rubocop = vim.tbl_deep_extend("force", opts.servers.rubocop or {}, {
+        -- See: https://docs.rubocop.org/rubocop/usage/lsp.html
+        name = "rubocop",
+        cmd = { "bundle", "exec", "rubocop", "--lsp" },
+        root_dir = root_pattern("Gemfile", ".git", "."),
+      })
+      opts.servers.ruby_lsp = vim.tbl_deep_extend("force", opts.servers.ruby_lsp or {}, {
+        name = "ruby-lsp",
+        -- cmd = { "bundle", "exec", "ruby-lsp" },
+        -- init_options = {
+        --   formatter = "auto",
+        -- },
+      })
+      opts.servers.solargraph = vim.tbl_deep_extend("force", opts.servers.solargraph or {}, {
+        name = "solargraph",
+        autostart = false,
+      })
+    end,
   },
   {
     "suketa/nvim-dap-ruby",

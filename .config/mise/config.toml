@@ -1,18 +1,43 @@
+[env]
+_.path = "bin"
+_.file = '.env'
+APP_ENV = "development"
+BUNDLE_BUILD__PSYCH = "--with-libyaml-dir=/opt/homebrew/opt/libyaml"
+PKG_CONFIG_PATH = "/opt/homebrew/opt/openssl@3/lib/pkgconfig:/opt/homebrew/opt/libyaml/lib/pkgconfig"
+RUBY_CONFIGURE_OPTS = "--enable-yjit --with-openssl-dir=/opt/homebrew/opt/openssl@3 --with-libyaml-dir=/opt/homebrew/opt/libyaml"
+
 [tools]
+bun = "latest"
+crystal = "latest"
 elixir = "latest"
 erlang = "latest"
+"github:anomalyco/opencode" = "latest"
+helm = "latest"
 java = "openjdk-25.0.0"
-ruby = 'latest'
-node = { version = "lts", postinstall = "corepack enable" }
-zig = "latest"
-python = "3"
-lua = "latest"
-crystal = "latest"
+k9s = "latest"
+kubectx = "latest"
+# LuaRocks 3.13.0 ships a malformed rockspec (two consecutive `tag = ...` lines, causes
+# `'}' expected near 'tag'` during the asdf-lua plugin's luarocks bootstrap). Pin to the
+# last known-good release until upstream fixes the package (expected in 3.13.1 / 3.14.0).
+# To check if the pin can be dropped: remove `install_env` and run `mise i -f lua@latest`;
+# if it completes without a rockspec parse error, the upstream bug is fixed.
+lua = { version = "latest", install_env = { ASDF_LUA_LUAROCKS_VERSION = "3.12.2" }, postinstall = "~/.config/mise/install-luarocks.sh" }
+node = { version = "lts", postinstall = "~/.config/mise/install-node-packages.sh" }
+packer = "latest"
+python = { version = "3", postinstall = "~/.config/mise/install-python-packages.sh" }
+ruby = { version = "latest", postinstall = "~/.config/mise/install-ruby-gems.sh" }
 rust = "latest"
+terraform = "latest"
+terragrunt = "latest"
+zig = "latest"
 
-[hooks]
-enter = "echo 'I entered the project'"
-leave = "echo 'I left the project'"
+[tool_alias.node.versions]
+jod = '22'
+krypton = "24"
+lithium = '26'
+magnesium = '28'
 
 [settings]
+auto_install = true
+experimental = true
 idiomatic_version_file_enable_tools = ["ruby", "node", "crystal"]

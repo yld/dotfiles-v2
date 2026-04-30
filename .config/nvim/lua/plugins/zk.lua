@@ -2,10 +2,8 @@ return {
   "mickael-menu/zk-nvim",
   config = function()
     require("zk").setup({
-      -- See Setup section below
-      -- can be "telescope", "fzf", "fzf_lua" or "select" (`vim.ui.select`)
-      -- it's recommended to use "telescope", "fzf" or "fzf_lua"
-      picker = "telescope",
+      -- Use the installed Snacks picker instead of Telescope.
+      picker = "snacks_picker",
 
       lsp = {
         -- `config` is passed to `vim.lsp.start_client(config)`
