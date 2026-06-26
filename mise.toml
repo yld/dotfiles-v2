@@ -1,0 +1,11 @@
+# Intentionally minimal.
+# Global user config lives at ~/.config/mise/config.toml.
+# This file used to duplicate it, which caused tool entries here to silently
+# shadow the canonical ones (mise merges most-specific wins, and ~/mise.toml
+# is more specific than ~/.config/mise/config.toml for any cwd under $HOME).
+#
+# Add user-scoped overrides here only if you want them to take precedence
+# over ~/.config/mise/config.toml everywhere under your home directory.
+[env]
+_.path = "bin"
+_.file = '.env'
